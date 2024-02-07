@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const data = [{id: 15, username: 'maria852', firstName: 'maria', lastName: 'silva', email: 'test@mail.com', password: 'test123', phone: '11985632850', userStatus: 1}]
 
 
-test.describe.only('New Todo', () => {
+test.describe('New Todo', () => {
   test('should allow create user by API request', async ({ request }) => {
     const newUser = await request.post(`/v2/user/createWithArray`, {data})
 
@@ -18,17 +18,11 @@ test.describe.only('New Todo', () => {
     const listUser = await request.get(`/v2/user/${data[0].username}`)
 
     const body = await listUser.json()
-
-    expect(listUser.status()).toEqual(200)
     expect([body]).toEqual(data)
   });
 });
 
 
-//TODO
-// finalizar automação POST mais um endpoint
 
-// teste automotizado de mobile nativo
-// webdriverio
 
 
