@@ -1,15 +1,17 @@
 const { test, expect } = require('@playwright/test');
 
-const data = JSON.parse(JSON.stringify(require("../testdata.json")))
+// Importing test data directly
+const data = require("../testdata.json")
 
 test.describe('New Todo', () => {
   test('should allow consult user by API request', async ({ request }) => {
-    
+    // Create a new user
     await request.post(`/v2/user/createWithArray`, {data})
-    
+    // Get the details of the user created
     const listUser = await request.get(`/v2/user/${data[0].username}`)
-
+    // Parse response body to JSON
     const body = await listUser.json()
+    // Assert that the response body matches the test data
     expect([body]).toEqual(data)
   });
 });
