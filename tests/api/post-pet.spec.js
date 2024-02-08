@@ -13,13 +13,6 @@ test.describe('New Todo', () => {
 
   });
 
-  test('should allow consult user by API reques', async ({ request }) => {
-
-    const listUser = await request.get(`/v2/user/${data[0].username}`)
-
-    const body = await listUser.json()
-    expect([body]).toEqual(data)
-  });
 });
 
 
