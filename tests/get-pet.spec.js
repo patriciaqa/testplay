@@ -18,6 +18,16 @@ test.describe('New Todo', () => {
 
     await request.delete(`/v2/user/${data[0].username}`)
   });
+
+  test('should consult inexistent user by API request', async ({ request }) => {
+
+    // Get the details of the user created
+    const listUser = await request.get(`/v2/user/${data[0].username}`)
+    // Asserting response status
+    expect(listUser.status()).toBe(404)
+    // Asserting response status text
+    expect(listUser.statusText()).toBe('Not Found')
+  });
   
 });
 
