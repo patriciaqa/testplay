@@ -4,7 +4,9 @@ const { test, expect } = require('@playwright/test');
 const data = require("../testdata.json")
 
 test.describe('New Todo', () => {
+
   test('should allow consult user by API request', async ({ request }) => {
+
     // Create a new user
     await request.post(`/v2/user/createWithArray`, {data})
     // Get the details of the user created
@@ -13,7 +15,10 @@ test.describe('New Todo', () => {
     const body = await listUser.json()
     // Assert that the response body matches the test data
     expect([body]).toEqual(data)
+
+    await request.delete(`/v2/user/${data[0].username}`)
   });
+  
 });
 
 
